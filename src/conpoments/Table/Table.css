@@ -1,0 +1,41 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+.btn-table{
+  display: flex;
+}
+.btn-add{
+  background: #4830ef;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  margin:  10px 20px 5px 0;
+  float: right;
+}
+.btn-edit{
+  background: #4830ef;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  margin:0 10px;
+}
+.btn-delete{
+  background: #ef3069;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
