@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {deleteUser, getUsers} from "../../services/Userservices";
 import "./Table.css"
-import {FaEdit} from 'react-icons/fa';
 import {RiDeleteBin5Line} from 'react-icons/ri';
-import AddUser from "../Modal/AddUser";
-import UpdateUser from "../Modal/UpdateUser";
+import AddUser from "../Modal/User/AddUser";
+import UpdateUser from "../Modal/User/UpdateUser";
+import {toast} from "react-toastify";
+import {FaEdit} from "react-icons/fa";
 
 const Table = () => {
     const [user, setUser] = useState([]);
@@ -43,11 +44,11 @@ const Table = () => {
             e.preventDefault();
             deleteUser(UserId)
                 .then((result) => {
-                        alert(result);
+                        toast.success(result);
                         setIsUpdated(true);
                     },
                     (error) => {
-                        alert("Failed to Delete Student");
+                        toast.error("Failed to Delete Student");
                     })
         }
     };
@@ -78,7 +79,11 @@ const Table = () => {
                         <td>{item.Email}</td>
                         <td>{item.Password}</td>
                         <td className="btn-table">
-                            <UpdateUser  onClick={event => handleUpdate(event,item)} show={editModalShow} user={editUser} setUpdated={setIsUpdated} onHide={EditModelClose}></UpdateUser>
+                              <button className="btn-edit"
+                    onClick={event => handleUpdate(event,item)}>
+                        <FaEdit/>
+                  </button>
+                            <UpdateUser show={editModalShow} user={editUser} setUpdated={setIsUpdated} onHide={EditModelClose}></UpdateUser>
                             <button className="btn-delete"  onClick={event => handleDelete(event,item.UserId)}><RiDeleteBin5Line/></button>
                         </td>
                     </tr>

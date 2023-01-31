@@ -1,9 +1,9 @@
-import {addUser} from "../../services/Userservices";
+import {addUser} from "../../../services/Userservices";
 import "./Modal.css"
 import Modal from 'react-modal';
 import {useState} from "react";
 import {CgClose} from "react-icons/cg";
-import Image from "../../assets/image";
+import Image from "../../../assets/image";
 import {toast} from 'react-toastify';
 import {RiImageAddFill} from "react-icons/ri";
 
@@ -61,7 +61,7 @@ const AddUser = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className="add-user">
                         <div className="item-img">
-                            <img src={Image.noAvt}/>
+                            <img src={Image.noAvt} alt="/"/>
                             <div>
                                 <label htmlFor="file"><RiImageAddFill size={30}/></label>
                                 <input type="file" id="file" style={{display: 'none'}}/>

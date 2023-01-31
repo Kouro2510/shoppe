@@ -1,9 +1,9 @@
-import {updateuser} from "../../services/Userservices";
+import {updateuser} from "../../../services/Userservices";
 import "./Modal.css"
 import Modal from 'react-modal';
 import {useState} from "react";
 import {CgClose} from "react-icons/cg";
-import Image from "../../assets/image";
+import Image from "../../../assets/image";
 import {toast} from 'react-toastify';
 import {RiImageAddFill} from "react-icons/ri";
 import {FaEdit} from "react-icons/fa";
@@ -21,55 +21,44 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
     },
 };
-const UpdateUser = (props) => {
-    const [modalIsOpen, setIsOpen] = useState(false);
+const UpdateUser = ({show,user,onHide}) => {
 
-    function openModal() {
-        setIsOpen(true);
-    }
 
-    function closeModal() {
-        setIsOpen(false);
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateuser(props.user.UserId,e.target)
+        updateuser(user.UserId,e.target)
             .then((res) => {
                     toast.success(res);
-                    props.setUpdated(true);
                 },
                 (error) => {
                     toast.error("Failed to Update User");
                 })
-           closeModal();
+           onHide();
     }
 
     return (
         <div>
-            <button className="btn-edit" onClick={openModal} ><FaEdit/></button>
             <Modal
-                {...props}
-                isOpen={modalIsOpen}
+                isOpen={show}
                 ariaHideApp={false}
-                onRequestClose={closeModal}
+                onRequestClose={onHide}
                 style={customStyles}
-                contentLabel="Example Modal"
-            >
+                contentLabel="Example Modal">
                 <h2>Add new user</h2>
-                <CgClose className="close" size={30} onClick={closeModal}>close</CgClose>
+                <CgClose className="close" size={30} onClick={onHide}>close</CgClose>
 
                 <form onSubmit={handleSubmit}>
                     <div className="add-user">
                         <div className="item-img">
-                            <img src={Image.noAvt}/>
+                            <img src={Image.noAvt} alt="/"/>
                             <div>
                                 <label htmlFor="file"><RiImageAddFill size={30}/></label>
                                 <input type="file" id="file" style={{display: 'none'}}/>
                             </div>
                             <div className="item-input btn-modal">
                                 <button className="btn-save">Save</button>
-                                <button className="btn-cancel" onClick={closeModal}>Cancel</button>
+                                <button className="btn-cancel" onClick={onHide}>Cancel</button>
                             </div>
                         </div>
                         <div className="item-form">
@@ -77,31 +66,31 @@ const UpdateUser = (props) => {
                                 <label>
                                     First Name
                                 </label>
-                                <input type="text" placeholder="First Name" name="FirstName" defaultValue={props.user.FirstName} />
+                                <input type="text" placeholder="First Name" name="FirstName" defaultValue={user.FirstName} />
                             </div>
                             <div className="item-input">
                                 <label>
                                     Last Name
                                 </label>
-                                <input type="text" placeholder="Last Name" name="LastName" defaultValue={props.user.LastName} />
+                                <input type="text" placeholder="Last Name" name="LastName" defaultValue={user.LastName} />
                             </div>
                             <div className="item-input">
                                 <label>
                                     User Name
                                 </label>
-                                <input type="text" placeholder="User Name" name="UserName" defaultValue={props.user.UserName} />
+                                <input type="text" placeholder="User Name" name="UserName" defaultValue={user.UserName} />
                             </div>
                             <div className="item-input">
                                 <label>
                                     Email
                                 </label>
-                                <input type="text" placeholder="Email" name="Email" defaultValue={props.user.Email} />
+                                <input type="text" placeholder="Email" name="Email" defaultValue={user.Email} />
                             </div>
                             <div className="item-input">
                                 <label>
                                     Password
                                 </label>
-                                <input type="password" placeholder=" Password" name="Password" defaultValue={props.user.Password} />
+                                <input type="password" placeholder=" Password" name="Password" defaultValue={user.Password} />
                             </div>
                             <div className="item-input">
                                 <label>
